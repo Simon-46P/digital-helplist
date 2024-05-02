@@ -50,8 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
                             <br/>
                             <button class="newsletter-btn"><i class="fa fa-envelope"></i> Login</button>
                         </form>
-                        <a href="">Lost password?</a>
+
                     </div>
+                    <div class="create-container">
+                        <a href="AccountRegister.php"><button class="signup-btn"><i class="fa-solid fa-user-plus"></i> Sign up</button></a>
+                        <a href="">Lost password?</a>
+                        </div>
                 </div>
             </div>
 

@@ -60,7 +60,9 @@ body {
   font-weight: 400;
   color: #333;
 }
-
+.fa-right-to-bracket {
+  cursor: pointer;
+}
 h1,
 h2,
 h3,
@@ -71,17 +73,36 @@ h6 {
   font-weight: 700;
   margin: 0 0 10px;
 }
-
+.create-container {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  gap: 20px;
+  text-align: center;
+}
+.signup-btn {
+  width: 160px;
+  height: 40px;
+  font-weight: 700;
+  background-color: #8bb6a5;
+  color: #fff;
+  border: none;
+  border-radius: 40px 40px 40px 40px;
+  text-align: center;
+}
 a {
   color: #2b2d42;
   font-weight: 500;
   -webkit-transition: 0.2s color;
   transition: 0.2s color;
 }
-
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  height: 36px;
+}
 a:hover,
 a:focus {
-  color: #d10024;
   text-decoration: none;
   outline: none;
 }
@@ -314,7 +335,7 @@ textarea.input {
 .section {
   padding-top: 30px;
   padding-bottom: 30px;
-  height: 70vh;
+  height: 100vh;
 }
 
 .section-title {
@@ -436,7 +457,7 @@ textarea.input {
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #e4e4e4;
+  background-color: white;
 }
 
 .header-links li {
@@ -451,6 +472,7 @@ textarea.input {
 
 .header-links li a {
   color: black;
+  padding: 0;
 }
 
 .header-links li a:hover {
@@ -643,8 +665,8 @@ textarea.input {
 ===========================================================*/
 
 #navigation {
-  background: #fff;
-  border-bottom: 2px solid #e4e7ed;
+  background: white;
+  border-bottom: 1px solid rgb(221, 221, 221);
 }
 
 /*----------------------------*\
@@ -2031,12 +2053,8 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  background: #e4e4e4;
+  background: white;
   color: black;
-}
-
-#bottom-footer {
-  background: #e4e4e4;
 }
 
 .footer {
@@ -2233,4 +2251,16 @@ textarea.input {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+#bottom-footer {
+  border-top: 1px solid rgb(189, 189, 189);
+  padding: 50px;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.footer-logo {
+  margin-bottom: 30px;
 }

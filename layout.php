@@ -19,8 +19,11 @@ $dbContext = new DbContext();
     <link type="text/css" rel="stylesheet" href="/css/slick-theme.css" />
     <link type="text/css" rel="stylesheet" href="/css/nouislider.min.css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <link type="text/css" rel="stylesheet" href="/css/style.css" />
     <link type="text/css" rel="stylesheet" href="/css/site.css" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -31,13 +34,19 @@ $dbContext = new DbContext();
     <!-- HEADER -->
     <header>
         <!-- TOP HEADER -->
+
         <div id="top-header">
-            <div class="container">
+
+            <div class="container nav-container">
+
                 <ul class="header-links pull-left">
-                    <li><a href="#"><i class="fa fa-phone"></i> +46-111-22-33</a></li>
-                    <li><a href="#"><i class="fa fa-envelope-o"></i> email@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> Testgatan 122</a></li>
+                <a href="/">
+                 <img src="img/favicon.ico" alt="logo" width="10%" height="10%">
+                </a>
+
+                EduQ - Student
                 </ul>
+                
                 <ul class="header-links pull-right">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -58,14 +67,15 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
                              <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
                                 echo '';}
 
-                                else { echo  '<a class="nav-link text-dark" href="/AccountRegister.php">Register</a>'; } ?>
+                                else { echo  '<i class="fa-solid fa-user-plus"></i> <a class="nav-link text-dark" href="/AccountRegister.php">Register</a>'; } ?>
 
                         </li>
                         <li class="nav-item">
+                
                              <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
                                 echo '';}
 
-                                else { echo  '<a class="nav-link text-dark" href="/AccountLogin.php">Login</a>'; } ?>
+                                else { echo  '   <i class="fa-solid fa-right-to-bracket"></i> <a class="nav-link text-dark" href="/AccountLogin.php">Login</a>'; } ?>
        
                         </li>
                     </ul>
@@ -79,7 +89,7 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
     <!-- NAVIGATION -->
     <nav id="navigation">
         <!-- container -->
-        <div class="container">
+     
             <!-- responsive-nav -->
             <div id="responsive-nav">
                 <!-- NAV -->
@@ -89,7 +99,7 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
                 <!-- /NAV -->
             </div>
             <!-- /responsive-nav -->
-        </div>
+        
         <!-- /container -->
     </nav>
     <!-- /NAVIGATION -->
@@ -182,23 +192,24 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
         <!-- /top footer -->
         <!-- bottom footer -->
         <div id="bottom-footer">
+        <img src="\img\eduq-white.png" alt="logo" width="10%" height="10%" class="footer-logo">
             <div class="container">
                 <!-- row -->
                 <div class="row">
                     <div class="col-md-12 text-center">
                         <ul class="footer-payments">
-                            <li><a href="#"><i class="fa fa-cc-visa"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-cc-visa"></i></a></li>
                             <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-paypal"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-mastercard"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-discover"></i></a></li>
-                            <li><a href="#"><i class="fa fa-cc-amex"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-cc-paypal"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-cc-mastercard"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-cc-discover"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-cc-amex"></i></a></li>
                         </ul>
                         <span class="copyright">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
                             Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            <script>document.write(new Date().getFullYear());</script> | All rights reserved</a>
+
                         </span>
                     </div>
                 </div>
