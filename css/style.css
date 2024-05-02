@@ -436,7 +436,7 @@ textarea.input {
 #top-header {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #1e1f29;
+  background-color: #e4e4e4;
 }
 
 .header-links li {
@@ -450,15 +450,15 @@ textarea.input {
 }
 
 .header-links li a {
-  color: #fff;
+  color: black;
 }
 
 .header-links li a:hover {
-  color: #d10024;
+  color: #8bb6a5;
 }
 
 .header-links li i {
-  color: #d10024;
+  color: #8bb6a5;
   margin-right: 5px;
 }
 
@@ -645,7 +645,6 @@ textarea.input {
 #navigation {
   background: #fff;
   border-bottom: 2px solid #e4e7ed;
-  border-top: 3px solid #d10024;
 }
 
 /*----------------------------*\
@@ -1989,7 +1988,7 @@ textarea.input {
   width: 160px;
   height: 40px;
   font-weight: 700;
-  background: #d10024;
+  background: #8bb6a5;
   color: #fff;
   border: none;
   border-radius: 40px 40px 40px 40px;
@@ -2032,12 +2031,12 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  background: #1e1f29;
-  color: #b9babc;
+  background: #e4e4e4;
+  color: black;
 }
 
 #bottom-footer {
-  background: #1e1f29;
+  background: #e4e4e4;
 }
 
 .footer {
@@ -2045,7 +2044,7 @@ textarea.input {
 }
 
 .footer .footer-title {
-  color: #fff;
+  color: black;
   text-transform: uppercase;
   font-size: 18px;
   margin: 0px 0px 30px;
@@ -2056,18 +2055,18 @@ textarea.input {
 }
 
 .footer-links li a {
-  color: #b9babc;
+  color: black;
 }
 
 .footer-links li i {
   margin-right: 15px;
-  color: #d10024;
+  color: #8bb6a5;
   width: 14px;
   text-align: center;
 }
 
 .footer-links li a:hover {
-  color: #d10024;
+  color: #8bb6a5;
 }
 
 .copyright {
