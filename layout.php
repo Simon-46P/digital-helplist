@@ -103,9 +103,9 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
     </div>
     <!-- /SECTION -->
     <!-- FOOTER -->
-    <footer id="footer">
+    <footer id="footer" class="center">
         <!-- top footer -->
-        <div class="section">
+        <div >
             <!-- container -->
             <div class="container">
                 <!-- row -->
@@ -118,8 +118,8 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
         </div>
         <!-- /top footer -->
         <!-- bottom footer -->
-        <div id="bottom-footer" class="section">
-            <div class="container">
+        <div id="bottom-footer">
+            <div>
                 <!-- row -->
                 <div class="row">
 <div class="col-md-3 col-xs-6">
@@ -181,7 +181,7 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
         </div>
         <!-- /top footer -->
         <!-- bottom footer -->
-        <div id="bottom-footer" class="section">
+        <div id="bottom-footer">
             <div class="container">
                 <!-- row -->
                 <div class="row">
