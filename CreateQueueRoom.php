@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="row">
     <div class="col-md-12">
         <div class="newsletter">
-            <p><strong>User Registration</strong></p>
+            <p><strong>Create Room</strong></p>
             <form method="post">
                 <input class="input" type="text" placeholder="Enter your room name" name="queueName"
                     value="<?php echo isset($_POST['queueName']) ? $_POST['queueName'] : ''; ?>">

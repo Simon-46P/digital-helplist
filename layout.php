@@ -32,7 +32,7 @@ $dbContext = new DbContext();
 </head>
 <body>
     <!-- HEADER -->
-    <header>
+    <header class="navbar-top">
         <!-- TOP HEADER -->
 
         <div id="top-header">
@@ -40,11 +40,14 @@ $dbContext = new DbContext();
             <div class="container nav-container">
 
                 <ul class="header-links pull-left">
+                    <div class="logo-container">
                 <a href="/">
-                 <img src="img/favicon.ico" alt="logo" width="10%" height="10%">
+                 <img src="img/favicon.ico" alt="logo" width="32px" height="28px">
                 </a>
-
-                EduQ - Student
+                <span class="logo-text">
+                Edu
+                </span>
+                </div>
                 </ul>
                 
                 <ul class="header-links pull-right">

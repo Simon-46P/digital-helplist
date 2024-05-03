@@ -95,9 +95,9 @@ class DBContext
             `id` int NOT NULL AUTO_INCREMENT,
             `date` datetime NOT NULL,
             `active` boolean NOT NULL,
-            `queue_id` int NOT NULL,
+            `queueroom_id` int NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`queue_id`) REFERENCES `QueueRoom` (`id`)
+            FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`)
         )";
 
         $this->pdo->exec($sql);
