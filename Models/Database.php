@@ -68,7 +68,7 @@ class DBContext
 
         $this->pdo->exec($sql);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `QueueDetails` (
+        $sql = "CREATE TABLE IF NOT EXISTS `QueueRoom` (
             `id` int NOT NULL AUTO_INCREMENT,
             `name` varchar(50) NOT NULL,
             `creationdate` datetime NOT NULL,
@@ -77,13 +77,13 @@ class DBContext
 
         $this->pdo->exec($sql);
 
-        $sql = "CREATE TABLE IF NOT EXISTS `Queue` (
+        $sql = "CREATE TABLE IF NOT EXISTS `QueuePosition` (
             `id` int NOT NULL AUTO_INCREMENT,
             `date` datetime NOT NULL,
             `active` boolean NOT NULL,
             `queue_id` int NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`queue_id`) REFERENCES `QueueDetails` (`id`)
+            FOREIGN KEY (`queue_id`) REFERENCES `QueueRoom` (`id`)
         )";
 
         $this->pdo->exec($sql);
