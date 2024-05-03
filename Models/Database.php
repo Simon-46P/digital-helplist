@@ -15,6 +15,8 @@ class DBContext
         return $this->usersDatabase;
     }
 
+
+
     function __construct()
     {
 
@@ -30,6 +32,18 @@ class DBContext
         $this->pdo = new PDO($dsn, $user, $pass);
         $this->usersDatabase = new UserDatabase($this->pdo);
         $this->initIfNotInitialized();
+
+    }
+    function createRoomQueue($roomName, $creationDate)
+    {
+
+        $prep = $this->pdo->prepare("INSERT INTO QueueRoom (name, creationdate)
+                                     VALUES (:name, :creationdate)");
+        $prep->execute([
+            "name" => $roomName,
+            "creationdate" => $creationDate
+        ]);
+        return $this->pdo->lastInsertId();
 
     }
 
