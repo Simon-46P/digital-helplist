@@ -55,7 +55,7 @@ class DBContext
             return;
         }
 
-        $sql1 = "CREATE TABLE IF NOT EXISTS `UserDetails` (
+        $sql = "CREATE TABLE IF NOT EXISTS `UserDetails` (
             `id` int NOT NULL AUTO_INCREMENT,
             `givenname` varchar(50) NOT NULL,
             `street` varchar(50) NOT NULL,
@@ -66,28 +66,27 @@ class DBContext
             FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
             ) ENGINE=MyISAM";
 
-        $this->pdo->exec($sql1);
+        $this->pdo->exec($sql);
 
-        $sql2 = "CREATE TABLE IF NOT EXISTS `QueueDetails` (
+        $sql = "CREATE TABLE IF NOT EXISTS `QueueDetails` (
             `id` int NOT NULL AUTO_INCREMENT,
             `name` varchar(50) NOT NULL,
             `creationdate` datetime NOT NULL,
             PRIMARY KEY (`id`)
         )";
 
-        $this->pdo->exec($sql2);
+        $this->pdo->exec($sql);
 
-        $sql3 = "CREATE TABLE IF NOT EXISTS `Queue` (
+        $sql = "CREATE TABLE IF NOT EXISTS `Queue` (
             `id` int NOT NULL AUTO_INCREMENT,
             `date` datetime NOT NULL,
             `active` boolean NOT NULL,
             `queue_id` int NOT NULL,
-            
             PRIMARY KEY (`id`),
             FOREIGN KEY (`queue_id`) REFERENCES `QueueDetails` (`id`)
         )";
 
-        $this->pdo->exec($sql3);
+        $this->pdo->exec($sql);
 
 
         $this->usersDatabase->setupUsers();
