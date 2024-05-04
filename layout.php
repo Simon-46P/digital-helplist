@@ -54,7 +54,7 @@ $dbContext = new DbContext();
     } else {
         $username = $dbContext->getUsersDatabase()->getAuth()->getUsername();
         $role = $dbContext->getRoleByUsername($username);
-        echo '<span class="role-text" href="/Account/Manage" title="Manage">' . $role . '</span>';
+        echo '<a class="role-text" href="ManageAccount.php" title="Wrong role? Click to manage account">' . $role . '</a>';
     } ?>
 </div>
 
@@ -68,7 +68,7 @@ $dbContext = new DbContext();
         } else {
             $username = $dbContext->getUsersDatabase()->getAuth()->getUsername();
             $givenname = $dbContext->getGivenNameByUsername($username);
-            echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage">Welcome back, ' . $givenname . '!</a>';
+            echo '<a class="nav-link text-dark" href="ManageAccount.php" title="Manage Account">Welcome back, ' . $givenname . '!</a>';
             
         } ?>
     </li>

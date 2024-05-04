@@ -100,6 +100,7 @@ a {
   display: flex;
   align-items: center;
   height: 36px;
+  gap: 12px;
 }
 a:hover,
 a:focus {
@@ -461,11 +462,9 @@ textarea.input {
 .header-links {
   display: flex;
   align-items: center;
-  margin-right: 64px;
 }
 .header-links li {
   display: inline-block;
-  margin-right: 15px;
   font-size: 12px;
 }
 
@@ -2390,7 +2389,6 @@ textarea.input {
 .logo-container a {
   display: flex;
   align-items: center;
-  margin-left: 132px;
 }
 .logo-text {
   display: flex;
@@ -2411,7 +2409,7 @@ textarea.input {
 }
 .nav-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   background-color: white;
   height: 56px;
 }
@@ -2440,6 +2438,9 @@ textarea.input {
   color: #8bb6a5;
   font-weight: bold;
   text-align: center;
+}
+.role-text:hover {
+  color: #719486;
 }
 
 .role-text::before {
