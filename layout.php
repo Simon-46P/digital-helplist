@@ -3,6 +3,10 @@ require_once('lib/PageTemplate.php');
 
 ob_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $dbContext = new DbContext();
 ?>
 
@@ -40,14 +44,20 @@ $dbContext = new DbContext();
             <div class="nav-container">
 
 
-                    <div class="logo-container">
-                <a href="/">
-                 <img src="img/favicon.ico" alt="logo" width="32px" height="28px">
-                 <span class="logo-text">
-                Edu
-                </span>
-                </a>
-                </div>
+            <div class="logo-container">
+    <a href="/">
+        <img src="img/favicon.ico" alt="logo" width="32px" height="28px">
+        <span class="logo-text">Edu</span>
+    </a>
+    <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+        echo '';
+    } else {
+        $username = $dbContext->getUsersDatabase()->getAuth()->getUsername();
+        $role = $dbContext->getRoleByUsername($username);
+        echo '<span class="role-text" href="/Account/Manage" title="Manage">' . $role . '</span>';
+    } ?>
+</div>
+
 
                 
                 <ul class="header-links">

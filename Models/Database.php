@@ -54,6 +54,16 @@ class DBContext
     $result = $prep->fetch(PDO::FETCH_ASSOC);
     return $result['givenname'];
 }
+function getRoleByUsername($username)
+{
+    $prep = $this->pdo->prepare("SELECT accountrole FROM UserDetails WHERE user_id = 
+    (SELECT id FROM users WHERE username = :username)");
+    $prep->execute(["username" => $username]);
+    $result = $prep->fetch(PDO::FETCH_ASSOC);
+    return $result['accountrole'];
+}
+
+
 
 
     function addUser($givenname, $street, $city, $zip, $accountrole, $user_id)
