@@ -35,22 +35,22 @@ $dbContext = new DbContext();
     <header class="navbar-top">
         <!-- TOP HEADER -->
 
-        <div id="top-header">
 
-            <div class="container nav-container">
 
-                <ul class="header-links pull-left">
+            <div class="nav-container">
+
+
                     <div class="logo-container">
                 <a href="/">
                  <img src="img/favicon.ico" alt="logo" width="32px" height="28px">
-                </a>
-                <span class="logo-text">
+                 <span class="logo-text">
                 Edu
                 </span>
+                </a>
                 </div>
-                </ul>
+
                 
-                <ul class="header-links pull-right">
+                <ul class="header-links">
                 <ul class="navbar-nav">
     <li class="nav-item">
         <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
@@ -87,7 +87,7 @@ $dbContext = new DbContext();
 
                 </ul>
             </div>
-        </div>
+
         <!-- /TOP HEADER -->
     
     </header>

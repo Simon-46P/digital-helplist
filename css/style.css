@@ -458,7 +458,11 @@ textarea.input {
   padding-bottom: 10px;
   background-color: rgb(255, 255, 255);
 }
-
+.header-links {
+  display: flex;
+  align-items: center;
+  margin-right: 64px;
+}
 .header-links li {
   display: inline-block;
   margin-right: 15px;
@@ -2201,7 +2205,9 @@ textarea.input {
   }
   #top-header .header-links.pull-right {
     float: none !important;
-    margin-top: 5px;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
   }
   .header-logo {
     float: none;
@@ -2379,12 +2385,17 @@ textarea.input {
 .logo-container {
   display: flex;
   align-items: center;
-  height: 36px;
+  cursor: pointer;
+}
+.logo-container a {
+  display: flex;
+  align-items: center;
+  margin-left: 132px;
 }
 .logo-text {
   display: flex;
   align-items: center;
-  font-size: 15px;
+  font-size: 24px;
   color: #a3ca98;
   font-weight: bolder;
   margin-left: 4px;
@@ -2397,4 +2408,29 @@ textarea.input {
 .nav-item {
   display: flex;
   align-items: center;
+}
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  height: 56px;
+}
+
+.radio-container {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-bottom: 16px;
+}
+
+.radio-input {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.radio-input label {
+  margin: 0;
+}
+.radio-input input {
+  margin: 0;
 }

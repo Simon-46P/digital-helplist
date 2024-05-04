@@ -56,16 +56,17 @@ class DBContext
 }
 
 
-    function addUser($givenname, $street, $city, $zip, $user_id)
+    function addUser($givenname, $street, $city, $zip, $accountrole, $user_id)
     {
 
-        $prep = $this->pdo->prepare("INSERT INTO UserDetails (givenname, street, city, zip, user_id)
-                                     VALUES (:givenname, :street, :city, :zip, :user_id)");
+        $prep = $this->pdo->prepare("INSERT INTO UserDetails (givenname, street, city, zip, accountrole, user_id)
+                                     VALUES (:givenname, :street, :city, :zip, :accountrole, :user_id)");
         $prep->execute([
             "givenname" => $givenname,
             "street" => $street,
             "city" => $city,
             "zip" => $zip,
+            "accountrole" => $accountrole,
             "user_id" => $user_id
         ]);
         return $this->pdo->lastInsertId();
@@ -84,6 +85,7 @@ class DBContext
             `street` varchar(50) NOT NULL,
             `city` varchar(50) NOT NULL,
             `zip` varchar(10) NOT NULL,
+            `accountrole` varchar(10) NOT NULL,
             `user_id` int(10) unsigned NOT NULL,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
