@@ -51,37 +51,40 @@ $dbContext = new DbContext();
                 </ul>
                 
                 <ul class="header-links pull-right">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
-                                echo '';}
+                <ul class="navbar-nav">
+    <li class="nav-item">
+        <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+            echo '';
+        } else {
+            $username = $dbContext->getUsersDatabase()->getAuth()->getUsername();
+            $givenname = $dbContext->getGivenNameByUsername($username);
+            echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage">Welcome back, ' . $givenname . '!</a>';
+            
+        } ?>
+    </li>
+    <li class="nav-item">
+        <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+            echo '';
+        } else {
+            echo '<a class="nav-link text-dark" href="/logout.php" title="Manage"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>';
+        } ?>
+    </li>
+    <li class="nav-item">
+        <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+            echo '';
+        } else {
+            echo '<i class="fa-solid fa-user-plus"></i> <a class="nav-link text-dark" href="/AccountRegister.php">Register</a>';
+        } ?>
+    </li>
+    <li class="nav-item">
+        <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
+            echo '';
+        } else {
+            echo '<i class="fa-solid fa-right-to-bracket"></i> <a class="nav-link text-dark" href="/AccountLogin.php">Login</a>';
+        } ?>
+    </li>
+</ul>
 
-else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage">Hello ' . $dbContext->getUsersDatabase()->getAuth()->getUsername() . '!</a>'; } ?>
-                           
-                        </li>
-                        <li class="nav-item">
-                            <?php if(!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
-                                echo '';}
-
-                                else { echo  '<a class="nav-link text-dark" href="/logout.php" title="Manage">Logout</a>'; } ?>
-                         
-                        </li>
-                        <li class="nav-item">
-                             <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
-                                echo '';}
-
-                                else { echo  '<i class="fa-solid fa-user-plus"></i> <a class="nav-link text-dark" href="/AccountRegister.php">Register</a>'; } ?>
-
-                        </li>
-                        <li class="nav-item">
-                
-                             <?php if($dbContext->getUsersDatabase()->getAuth()->isLoggedIn()){
-                                echo '';}
-
-                                else { echo  '   <i class="fa-solid fa-right-to-bracket"></i> <a class="nav-link text-dark" href="/AccountLogin.php">Login</a>'; } ?>
-       
-                        </li>
-                    </ul>
                 </ul>
             </div>
         </div>
@@ -211,7 +214,7 @@ else { echo '<a class="nav-link text-dark" href="/Account/Manage" title="Manage"
                         <span class="copyright">
 
                             Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> | All rights reserved</a>
+                            <script>document.write(new Date().getFullYear());</script> EduQ | All rights reserved</a>
 
                         </span>
                     </div>

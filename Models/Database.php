@@ -46,6 +46,15 @@ class DBContext
         return $this->pdo->lastInsertId();
 
     }
+    function getGivenNameByUsername($username)
+{
+    $prep = $this->pdo->prepare("SELECT givenname FROM UserDetails WHERE user_id = 
+    (SELECT id FROM users WHERE username = :username)");
+    $prep->execute(["username" => $username]);
+    $result = $prep->fetch(PDO::FETCH_ASSOC);
+    return $result['givenname'];
+}
+
 
     function addUser($givenname, $street, $city, $zip, $user_id)
     {

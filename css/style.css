@@ -480,7 +480,8 @@ textarea.input {
 
 .header-links li i {
   color: #8bb6a5;
-  margin-right: 5px;
+  margin-right: 2px;
+  cursor: pointer;
 }
 
 /*----------------------------*\
@@ -2392,4 +2393,8 @@ textarea.input {
   content: "Q";
   color: #8bb6a5;
   font-weight: bolder;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
 }
