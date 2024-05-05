@@ -2055,18 +2055,14 @@ textarea.input {
 ===========================================================*/
 
 #footer {
-  background: white;
-  color: black;
-}
-
-.footer {
-  margin: 30px 0px;
+  background: #a3ca98;
+  color: white;
+  margin-top: 64px;
 }
 
 .footer .footer-title {
-  color: black;
-  text-transform: uppercase;
-  font-size: 18px;
+  color: white;
+  font-size: 20px;
   margin: 0px 0px 30px;
 }
 
@@ -2075,25 +2071,49 @@ textarea.input {
 }
 
 .footer-links li a {
-  color: black;
+  color: white;
 }
 
 .footer-links li i {
   margin-right: 15px;
-  color: #8bb6a5;
+  color: white;
   width: 14px;
   text-align: center;
 }
 
-.footer-links li a:hover {
-  color: #8bb6a5;
+.underline-effect a {
+  padding: 10px 0;
+  position: relative;
+}
+
+.underline-effect a:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: transparent;
+  padding: 6px 0;
+  max-width: 0%;
+  border-bottom: 2px solid white;
+  content: attr(data-hover);
+  white-space: nowrap;
+  -webkit-transition: max-width 0.25s;
+  -moz-transition: max-width 0.25s;
+  transition: max-width 0.25s;
+}
+
+.underline-effect a:hover:before,
+.underline-effect a:focus:before {
+  max-width: 100%;
 }
 
 .copyright {
-  margin-top: 30px;
-  display: block;
+  width: 100%;
+  padding: 0 130px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
   font-size: 12px;
-  padding-bottom: 40px;
 }
 
 .footer-payments li {
@@ -2258,15 +2278,22 @@ textarea.input {
 }
 
 #bottom-footer {
-  border-top: 1px solid rgb(189, 189, 189);
-  padding: 50px;
-  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding: 80px 130px;
+  gap: 64px;
+}
+.footer-info {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  font-size: 16px;
 }
 .footer-logo {
-  margin-bottom: 30px;
+  font-size: 32px;
+  color: White;
+  margin-bottom: 18px;
 }
 .navbar-top {
   position: sticky;
@@ -2412,6 +2439,10 @@ textarea.input {
   justify-content: space-around;
   background-color: white;
   height: 56px;
+  margin-bottom: 64px;
+}
+.fa-linkedin {
+  font-size: 32px;
 }
 
 .radio-container {
@@ -2420,7 +2451,12 @@ textarea.input {
   gap: 48px;
   margin-bottom: 16px;
 }
-
+.logo-text-link a {
+  margin-top: 72px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .radio-input {
   display: flex;
   align-items: center;

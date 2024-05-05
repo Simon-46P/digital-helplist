@@ -130,110 +130,77 @@ $dbContext = new DbContext();
     <!-- /SECTION -->
     <!-- FOOTER -->
     <footer id="footer" class="center">
-        <!-- top footer -->
-        <div >
-            <!-- container -->
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <!-- Footer content goes here -->
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /top footer -->
-        <!-- bottom footer -->
         <div id="bottom-footer">
-            <div>
-                <!-- row -->
-                <div class="row">
-<div class="col-md-3 col-xs-6">
+                <div class="footer-info">
                         <div class="footer">
-                            <h3 class="footer-title">About Us</h3>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut.</p>
+                            <h3 class="footer-logo">EduQ</h3>
                             <ul class="footer-links">
-                                <li><a href="#"><i class="fa fa-map-marker"></i>1734 Stonecoal Road</a></li>
-                                <li><a href="#"><i class="fa fa-phone"></i>+021-95-51-84</a></li>
-                                <li><a href="#"><i class="fa fa-envelope-o"></i>email@email.com</a></li>
+                                <li>EduQ facilitates the pedagogical work<br>and administrative processes within schools<br>enabling a better education.</li>
+                                <li class="logo-text-link"><a href="#"><i class="fa-brands fa-linkedin"></i>@EduQ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                
+                    <div class="footer-info">
+                        <div class="footer">
+                            <h3 class="footer-title">EduQ</h3>
+                            <ul class="footer-links underline-effect">
+                                <li><a href="#" data-hover="About EduQ">About EduQ</a></li>
+                                <li><a href="#" data-hover="Blog">Blog</a></li>
+                                <li><a href="#" data-hover="Customers">Customers</a></li>
+                                <li><a href="#" data-hover="Terms & Conditions">Terms & Conditions</a></li>
+                                <li><a href="#" data-hover="Privacy Policy">Privacy Policy</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-xs-6">
+                    <div class="footer-info">
                         <div class="footer">
-                            <h3 class="footer-title">Categories</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">Hot deals</a></li>
-                                <li><a href="#">Laptops</a></li>
-                                <li><a href="#">Smartphones</a></li>
-                                <li><a href="#">Cameras</a></li>
-                                <li><a href="#">Accessories</a></li>
+                            <h3 class="footer-title">School Forms</h3>
+                            <ul class="footer-links underline-effect">
+                                <li><a href="#" data-hover="Preschool">Preschool</a></li>
+                                <li><a href="#" data-hover="Primary School">Primary School</a></li>
+                                <li><a href="#" data-hover="High School">High School</a></li>
+                                <li><a href="#" data-hover="University">University</a></li>
+                                <li><a href="#" data-hover="Adult Education">Adult Education</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="clearfix visible-xs"></div>
-
-                    <div class="col-md-3 col-xs-6">
+                    <div class="footer-info">
                         <div class="footer">
-                            <h3 class="footer-title">Information</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">About Us</a></li>
-                                <li><a href="#">Contact Us</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="#">Orders and Returns</a></li>
-                                <li><a href="#">Terms & Conditions</a></li>
+                            <h3 class="footer-title">Products</h3>
+                            <ul class="footer-links underline-effect">
+                                <li><a href="#" data-hover="Help Queue System">Help Queue System</a></li>
+                                <li><a href="#" data-hover="Resource Sharing Hub">Resource Sharing Hub</a></li>
+                                <li><a href="#" data-hover="Interactive Whiteboard">Interactive Whiteboard</a></li>
+                                <li><a href="#" data-hover="Assessment and Grading Module">Assessment and Grading Module</a></li>
+                                <li><a href="#" data-hover="Collaborative Learning Spaces">Collaborative Learning Spaces</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-info">
+                        <div class="footer">
+                            <h3 class="footer-title">Contact</h3>
+                            <ul class="footer-links underline-effect">
+                                <li><a href="#" data-hover="Contact us">Contact us</a></li>
+                                <li><a href="#" data-hover="Career">Career</a></li>
+                                <li><a href="#" data-hover="Support">Support</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <div class="col-md-3 col-xs-6">
-                        <div class="footer">
-                            <h3 class="footer-title">Service</h3>
-                            <ul class="footer-links">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#">View Cart</a></li>
-                                <li><a href="#">Wishlist</a></li>
-                                <li><a href="#">Track My Order</a></li>
-                                <li><a href="#">Help</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /row -->
             </div>
             <!-- /container -->
-        </div>
+        <span class="copyright">
+
+Copyright &copy;
+<script>document.write(new Date().getFullYear());</script> EduQ | All rights reserved</a>
+
+</span>
         <!-- /top footer -->
-        <!-- bottom footer -->
-        <div id="bottom-footer">
-        <img src="\img\eduq-white.png" alt="logo" width="10%" height="10%" class="footer-logo">
-            <div class="container">
-                <!-- row -->
-                <div class="row">
-                    <div class="col-md-12 text-center">
-                        <ul class="footer-payments">
-                            <li><a href="#"><i class="fa-brands fa-cc-visa"></i></a></li>
-                            <li><a href="#"><i class="fa fa-credit-card"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-cc-paypal"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-cc-mastercard"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-cc-discover"></i></a></li>
-                            <li><a href="#"><i class="fa-brands fa-cc-amex"></i></a></li>
-                        </ul>
-                        <span class="copyright">
-
-                            Copyright &copy;
-                            <script>document.write(new Date().getFullYear());</script> EduQ | All rights reserved</a>
-
-                        </span>
-                    </div>
-                </div>
-                <!-- /row -->
-            </div>
-            <!-- /container -->
-        </div>
-        <!-- /bottom footer -->
+      
     </footer>
     <!-- /FOOTER -->
     <!-- jQuery Plugins -->
