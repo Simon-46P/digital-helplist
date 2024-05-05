@@ -2072,6 +2072,7 @@ textarea.input {
 
 .footer-links li a {
   color: white;
+  white-space: nowrap;
 }
 
 .footer-links li i {
@@ -2484,4 +2485,12 @@ textarea.input {
   margin: 0 8px;
   font-size: 24px;
   font-weight: 100;
+}
+.message-container {
+  display: flex;
+  gap: 8px;
+}
+.dud {
+  color: gray;
+  white-space: nowrap;
 }

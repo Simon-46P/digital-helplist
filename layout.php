@@ -210,6 +210,7 @@ Copyright &copy;
     <script src="/js/nouislider.min.js"></script>
     <script src="/js/jquery.zoom.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/messagescroller.js" defer></script>
     <!-- @RenderSection("Scripts", false) -->
 </body>
 </html>

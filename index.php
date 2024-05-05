@@ -38,7 +38,7 @@ if (!isset($TPL)) {
         <img src="img/helpimage.jpg" alt="Help Image" class="help-img">
     </div>
     <div class="functionality-container">
-        <h1>Accessible Everywhere</h1>
+        <h2 id="messenger"></h2>
         <p>EduQ is meticulously designed to streamline school operations across all demographics, fostering inclusivity and efficiency. It provides a secure foundation for seamless management.</p>
         <p><b>Highlighted Features:</b></p>
             <li><i class="fa-solid fa-circle-check"></i> Attendance Tracking</li>
@@ -51,6 +51,6 @@ if (!isset($TPL)) {
     </div>
 </div>
 
-
-    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="textScroller.js"></script>  
 
