@@ -2064,6 +2064,7 @@ textarea.input {
   color: white;
   font-size: 20px;
   margin: 0px 0px 30px;
+  white-space: nowrap;
 }
 
 .footer-links li + li {

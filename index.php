@@ -25,7 +25,7 @@ if (!isset($TPL)) {
                 </div>
 
                 <div class="costumer-container">
-                    <p><i class="fa-solid fa-circle-question"></i><b> Already a customer?</b> <a href="/CreateQueue.php">Get started!</a></p>
+                    <p><i class="fa-solid fa-circle-question"></i><b> Already a customer?</b> <a href="/CreateQueueRoom.php">Get started!</a></p>
                    
                 </div>
         </div>
