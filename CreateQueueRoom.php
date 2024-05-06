@@ -30,8 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($validator->is_valid()) {
         $username = $_POST['queueName'];
         $date = date('Y-m-d H:i:s');
+        $userId = $dbContext->getUsersDatabase()->getAuth()->getUserId();
 
-        $dbContext->createRoomQueue($username, $date);
+        $dbContext->createRoomQueue($username, $date, $userId);
 
     } else {
         $validationErrors = $validator->error_messages;

@@ -34,14 +34,15 @@ class DBContext
         $this->initIfNotInitialized();
 
     }
-    function createRoomQueue($roomName, $creationDate)
+    function createRoomQueue($roomName, $creationDate, $userId)
     {
 
-        $prep = $this->pdo->prepare("INSERT INTO QueueRoom (name, creationdate)
-                                     VALUES (:name, :creationdate)");
+        $prep = $this->pdo->prepare("INSERT INTO QueueRoom (name, creationdate, user_id)
+                                     VALUES (:name, :creationdate, :user_id)");
         $prep->execute([
             "name" => $roomName,
-            "creationdate" => $creationDate
+            "creationdate" => $creationDate,
+            "user_id" => $userId
         ]);
         return $this->pdo->lastInsertId();
 
@@ -107,8 +108,10 @@ function getRoleByUsername($username)
             `id` int NOT NULL AUTO_INCREMENT,
             `name` varchar(50) NOT NULL,
             `creationdate` datetime NOT NULL,
-            PRIMARY KEY (`id`)
-        )";
+            `user_id` int(10) unsigned NOT NULL,
+            PRIMARY KEY (`id`),
+            FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+        ) ENGINE=MyISAM";
 
         $this->pdo->exec($sql);
 
@@ -119,7 +122,7 @@ function getRoleByUsername($username)
             `queueroom_id` int NOT NULL,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`)
-        )";
+        ) ENGINE=MyISAM";
 
         $this->pdo->exec($sql);
 
