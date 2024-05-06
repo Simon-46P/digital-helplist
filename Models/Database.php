@@ -64,6 +64,27 @@ function getRoleByUsername($username)
     return $result['accountrole'];
 }
 
+public function getUserData($userId) {
+    $prep = $this->pdo->prepare("SELECT * FROM users WHERE id = :userId");
+    $prep->bindParam(':userId', $userId);
+    $prep->execute();
+
+    $userData = $prep->fetch(PDO::FETCH_ASSOC);
+
+    return $userData;
+}
+public function getUserDetails($userId) {
+    $prep = $this->pdo->prepare("SELECT users.*, UserDetails.givenname, UserDetails.street, UserDetails.city, UserDetails.zip, UserDetails.accountrole 
+                                 FROM users 
+                                 LEFT JOIN UserDetails ON users.id = UserDetails.user_id 
+                                 WHERE users.id = :userId");
+    $prep->bindParam(':userId', $userId);
+    $prep->execute();
+
+    $userDetails = $prep->fetch(PDO::FETCH_ASSOC);
+
+    return $userDetails;
+}
 
 
 
@@ -84,6 +105,19 @@ function getRoleByUsername($username)
 
     }
 
+    public function updateUser($userId, $givenName, $street, $city, $zip, $accountRole)
+    {
+        $prep = $this->pdo->prepare("UPDATE UserDetails SET givenname = :givenname, street = :street, city = :city, zip = :zip, accountrole = :accountrole WHERE user_id = :userId");
+        $prep->execute([
+            "givenname" => $givenName,
+            "street" => $street,
+            "city" => $city,
+            "zip" => $zip,
+            "accountrole" => $accountRole,
+            "userId" => $userId
+        ]);
+    }
+    
     function initIfNotInitialized()
     {
         if ($this->initialized) {
