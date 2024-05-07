@@ -1,7 +1,7 @@
 <?php
 require_once ('Models/Customer.php');
 require_once ('Models/UserDatabase.php');
-
+require_once ("Models/QueueRoom.php");
 class DBContext
 {
 
@@ -34,6 +34,28 @@ class DBContext
         $this->initIfNotInitialized();
 
     }
+    function getHelpRooms($roomId = null)
+    {
+        $sql = "SELECT * FROM QueueRoom";
+        $parramsArray = [];
+        $addedWhere = false;
+
+        if ($roomId !== null && strlen($roomId) > 0) {
+            if (!$addedWhere) {
+                $sql = $sql . " WHERE ";
+                $addedWhere = true;
+            } else {
+                $sql = $sql . " AND ";
+            }
+            $sql = $sql . " ( id = :roomId )";
+            $parramsArray["roomId"] = $roomId;
+        }
+        $prep = $this->pdo->prepare($sql);
+        $prep->setFetchMode(PDO::FETCH_CLASS, "QueueRoom");
+        $prep->execute($parramsArray);
+        return $prep->fetchAll();
+    }
+
     function createRoomQueue($roomName, $creationDate, $userId)
     {
 
@@ -48,21 +70,21 @@ class DBContext
 
     }
     function getGivenNameByUsername($username)
-{
-    $prep = $this->pdo->prepare("SELECT givenname FROM UserDetails WHERE user_id = 
+    {
+        $prep = $this->pdo->prepare("SELECT givenname FROM UserDetails WHERE user_id = 
     (SELECT id FROM users WHERE username = :username)");
-    $prep->execute(["username" => $username]);
-    $result = $prep->fetch(PDO::FETCH_ASSOC);
-    return $result['givenname'];
-}
-function getRoleByUsername($username)
-{
-    $prep = $this->pdo->prepare("SELECT accountrole FROM UserDetails WHERE user_id = 
+        $prep->execute(["username" => $username]);
+        $result = $prep->fetch(PDO::FETCH_ASSOC);
+        return $result['givenname'];
+    }
+    function getRoleByUsername($username)
+    {
+        $prep = $this->pdo->prepare("SELECT accountrole FROM UserDetails WHERE user_id = 
     (SELECT id FROM users WHERE username = :username)");
-    $prep->execute(["username" => $username]);
-    $result = $prep->fetch(PDO::FETCH_ASSOC);
-    return $result['accountrole'];
-}
+        $prep->execute(["username" => $username]);
+        $result = $prep->fetch(PDO::FETCH_ASSOC);
+        return $result['accountrole'];
+    }
 
 public function getUserData($userId) {
     $prep = $this->pdo->prepare("SELECT * FROM users WHERE id = :userId");
