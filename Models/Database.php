@@ -139,6 +139,19 @@ public function getUserDetails($userId) {
             "userId" => $userId
         ]);
     }
+
+    function addUserToQueue($date, $active, $queueroom_id, $user_id) {
+        $prep = $this->pdo->prepare("INSERT INTO QueuePosition (date, active, queueroom_id, user_id)
+        VALUES (:date, :active, :queueroom_id, :user_id)");
+        $prep->execute([
+        "date" => $date,
+        "active" => $active,
+        "queueroom_id" => $queueroom_id,
+        "user_id" => $user_id,
+
+        ]);
+        return $this->pdo->lastInsertId();
+    }
     
     function initIfNotInitialized()
     {

@@ -27,6 +27,7 @@ $helpRoom = $dbContext->getHelpRooms($roomId)[0];
 
 <p>
 <div class="row">
+    <button href="" ></button>
     <div class="col-md-12">
         <div class="newsletter">
 
