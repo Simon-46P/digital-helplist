@@ -2,6 +2,7 @@
 require_once ('Models/Customer.php');
 require_once ('Models/UserDatabase.php');
 require_once ("Models/QueueRoom.php");
+require_once ("Models/QueuePosition.php");
 class DBContext
 {
 
@@ -59,12 +60,12 @@ class DBContext
     function createRoomQueue($roomName, $creationDate, $userId)
     {
 
-        $prep = $this->pdo->prepare("INSERT INTO QueueRoom (name, creationdate, user_id)
-                                     VALUES (:name, :creationdate, :user_id)");
+        $prep = $this->pdo->prepare("INSERT INTO QueueRoom (name, creationdate, admin_user_id)
+                                     VALUES (:name, :creationdate, :admin_user_id)");
         $prep->execute([
             "name" => $roomName,
             "creationdate" => $creationDate,
-            "user_id" => $userId
+            "admin_user_id" => $userId
         ]);
         return $this->pdo->lastInsertId();
 
@@ -86,27 +87,29 @@ class DBContext
         return $result['accountrole'];
     }
 
-public function getUserData($userId) {
-    $prep = $this->pdo->prepare("SELECT * FROM users WHERE id = :userId");
-    $prep->bindParam(':userId', $userId);
-    $prep->execute();
+    public function getUserData($userId)
+    {
+        $prep = $this->pdo->prepare("SELECT * FROM users WHERE id = :userId");
+        $prep->bindParam(':userId', $userId);
+        $prep->execute();
 
-    $userData = $prep->fetch(PDO::FETCH_ASSOC);
+        $userData = $prep->fetch(PDO::FETCH_ASSOC);
 
-    return $userData;
-}
-public function getUserDetails($userId) {
-    $prep = $this->pdo->prepare("SELECT users.*, UserDetails.givenname, UserDetails.street, UserDetails.city, UserDetails.zip, UserDetails.accountrole 
+        return $userData;
+    }
+    public function getUserDetails($userId)
+    {
+        $prep = $this->pdo->prepare("SELECT users.*, UserDetails.givenname, UserDetails.street, UserDetails.city, UserDetails.zip, UserDetails.accountrole 
                                  FROM users 
                                  LEFT JOIN UserDetails ON users.id = UserDetails.user_id 
                                  WHERE users.id = :userId");
-    $prep->bindParam(':userId', $userId);
-    $prep->execute();
+        $prep->bindParam(':userId', $userId);
+        $prep->execute();
 
-    $userDetails = $prep->fetch(PDO::FETCH_ASSOC);
+        $userDetails = $prep->fetch(PDO::FETCH_ASSOC);
 
-    return $userDetails;
-}
+        return $userDetails;
+    }
 
 
 
@@ -140,19 +143,31 @@ public function getUserDetails($userId) {
         ]);
     }
 
-    function addUserToQueue($date, $active, $queueroom_id, $user_id) {
+    function addUserToQueue($date, $queueroom_id, $user_id, $active = true)
+    {
         $prep = $this->pdo->prepare("INSERT INTO QueuePosition (date, active, queueroom_id, user_id)
         VALUES (:date, :active, :queueroom_id, :user_id)");
         $prep->execute([
-        "date" => $date,
-        "active" => $active,
-        "queueroom_id" => $queueroom_id,
-        "user_id" => $user_id,
+            "date" => $date,
+            "active" => $active,
+            "queueroom_id" => $queueroom_id,
+            "user_id" => $user_id,
 
         ]);
         return $this->pdo->lastInsertId();
     }
-    
+
+    function getHelpQueue($roomId)
+    {
+        $sql = "SELECT * FROM QueuePosition 
+        JOIN users On users.id = queueposition.user_id
+        WHERE queueroom_id = :roomId AND active = true ORDER BY date desc;";
+        $prep = $this->pdo->prepare($sql);
+        $prep->setFetchMode(PDO::FETCH_CLASS, "QueuePosition");
+        $prep->execute(["roomId" => $roomId]);
+        return $prep->fetchAll();
+
+    }
     function initIfNotInitialized()
     {
         if ($this->initialized) {
@@ -177,9 +192,9 @@ public function getUserDetails($userId) {
             `id` int NOT NULL AUTO_INCREMENT,
             `name` varchar(50) NOT NULL,
             `creationdate` datetime NOT NULL,
-            `user_id` int(10) unsigned NOT NULL,
+            `admin_user_id` int(10) unsigned NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+            FOREIGN KEY (`admin_user_id`) REFERENCES `users` (`id`)
         ) ENGINE=MyISAM";
 
         $this->pdo->exec($sql);
