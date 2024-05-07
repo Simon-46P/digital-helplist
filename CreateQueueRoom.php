@@ -33,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $userId = $dbContext->getUsersDatabase()->getAuth()->getUserId();
 
         $dbContext->createRoomQueue($username, $date, $userId);
+        header("Location: /HelpRooms.php");
 
     } else {
         $validationErrors = $validator->error_messages;
