@@ -161,7 +161,7 @@ class DBContext
     {
         $sql = "SELECT * FROM QueuePosition 
         JOIN users On users.id = queueposition.user_id
-        WHERE queueroom_id = :roomId AND active = true ORDER BY date desc;";
+        WHERE queueroom_id = :roomId AND active = true ORDER BY date asc;";
         $prep = $this->pdo->prepare($sql);
         $prep->setFetchMode(PDO::FETCH_CLASS, "QueuePosition");
         $prep->execute(["roomId" => $roomId]);
