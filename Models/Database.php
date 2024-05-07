@@ -176,8 +176,10 @@ public function getUserDetails($userId) {
             `date` datetime NOT NULL,
             `active` boolean NOT NULL,
             `queueroom_id` int NOT NULL,
+            `user_id` int NOT NULL,
             PRIMARY KEY (`id`),
-            FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`)
+            FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`),
+            FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
         ) ENGINE=MyISAM";
 
         $this->pdo->exec($sql);
