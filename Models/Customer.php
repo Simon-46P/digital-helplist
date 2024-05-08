@@ -1,10 +1,14 @@
 <?php
-class Customer{
+class Customer
+{
     public $Id;
     public $GivenName;
+    public $lastname;
+
     public $Street;
     public $City;
     public $Zip;
-};
+}
+;
 
 ?>

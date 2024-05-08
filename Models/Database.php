@@ -99,7 +99,7 @@ class DBContext
     }
     public function getUserDetails($userId)
     {
-        $prep = $this->pdo->prepare("SELECT users.*, UserDetails.givenname, UserDetails.street, UserDetails.city, UserDetails.zip, UserDetails.accountrole 
+        $prep = $this->pdo->prepare("SELECT users.*, UserDetails.givenname, UserDetails.lastname, UserDetails.street, UserDetails.city, UserDetails.zip, UserDetails.accountrole 
                                  FROM users 
                                  LEFT JOIN UserDetails ON users.id = UserDetails.user_id 
                                  WHERE users.id = :userId");
@@ -113,13 +113,14 @@ class DBContext
 
 
 
-    function addUser($givenname, $street, $city, $zip, $accountrole, $user_id)
+    function addUser($givenname, $lastname, $street, $city, $zip, $accountrole, $user_id)
     {
 
-        $prep = $this->pdo->prepare("INSERT INTO UserDetails (givenname, street, city, zip, accountrole, user_id)
-                                     VALUES (:givenname, :street, :city, :zip, :accountrole, :user_id)");
+        $prep = $this->pdo->prepare("INSERT INTO UserDetails (givenname, lastname, street, city, zip, accountrole, user_id)
+                                     VALUES (:givenname, :lastname, :street, :city, :zip, :accountrole, :user_id)");
         $prep->execute([
             "givenname" => $givenname,
+            "lastname" => $lastname,
             "street" => $street,
             "city" => $city,
             "zip" => $zip,
@@ -130,11 +131,12 @@ class DBContext
 
     }
 
-    public function updateUser($userId, $givenName, $street, $city, $zip, $accountRole)
+    public function updateUser($userId, $givenName, $lastname, $street, $city, $zip, $accountRole)
     {
-        $prep = $this->pdo->prepare("UPDATE UserDetails SET givenname = :givenname, street = :street, city = :city, zip = :zip, accountrole = :accountrole WHERE user_id = :userId");
+        $prep = $this->pdo->prepare("UPDATE UserDetails SET givenname = :givenname, lastname = :lastname, street = :street, city = :city, zip = :zip, accountrole = :accountrole WHERE user_id = :userId");
         $prep->execute([
             "givenname" => $givenName,
+            "lastname" => $lastname,
             "street" => $street,
             "city" => $city,
             "zip" => $zip,
@@ -156,11 +158,27 @@ class DBContext
         ]);
         return $this->pdo->lastInsertId();
     }
-
+    function IfUserInQueue($user_id, $roomId)
+    {
+        $sql = "SELECT * FROM QueuePosition 
+        WHERE queueroom_id = :roomId AND active = true AND user_id = :user_id;";
+        $prep = $this->pdo->prepare($sql);
+        $prep->setFetchMode(PDO::FETCH_CLASS, "QueuePosition");
+        $prep->execute(["user_id" => $user_id, "roomId" => $roomId]);
+        return $prep->fetchAll();
+    }
+    function removeFromQueue($user_id, $queueroom_id)
+    {
+        $prep = $this->pdo->prepare("UPDATE QueuePosition SET active = false WHERE user_id = :user_id AND queueroom_id = :queueroom_id");
+        $prep->execute([
+            "user_id" => $user_id,
+            "queueroom_id" => $queueroom_id,
+        ]);
+    }
     function getHelpQueue($roomId)
     {
         $sql = "SELECT * FROM QueuePosition 
-        JOIN users On users.id = queueposition.user_id
+        JOIN userdetails On userdetails.user_id = queueposition.user_id
         WHERE queueroom_id = :roomId AND active = true ORDER BY date asc;";
         $prep = $this->pdo->prepare($sql);
         $prep->setFetchMode(PDO::FETCH_CLASS, "QueuePosition");
@@ -177,6 +195,7 @@ class DBContext
         $sql = "CREATE TABLE IF NOT EXISTS `UserDetails` (
             `id` int NOT NULL AUTO_INCREMENT,
             `givenname` varchar(50) NOT NULL,
+            `lastname` varchar(50) NOT NULL,
             `street` varchar(50) NOT NULL,
             `city` varchar(50) NOT NULL,
             `zip` varchar(10) NOT NULL,

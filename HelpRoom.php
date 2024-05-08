@@ -12,32 +12,56 @@ if (!isset($TPL)) {
 }
 
 $dbContext = new DbContext();
+$user_id = $dbContext->getUsersDatabase()->getAuth()->getUserId();
 if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()) {
     header("Location: /AccountLogin.php");
     exit;
 }
 date_default_timezone_set("Europe/Stockholm");
-
 $message = "";
 $username = "";
 $roomId = intval($_GET["roomId"]);
 $helpRoom = $dbContext->getHelpRooms($roomId)[0];
 $helpList = $dbContext->getHelpQueue($roomId);
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $date = date('Y-m-d H:i:s');
-    $user_id = $dbContext->getUsersDatabase()->getAuth()->getUserId();
+    if (count($dbContext->IfUserInQueue($user_id, $roomId)) > 0) {
+        $dbContext->removeFromQueue($user_id, $roomId);
+        $message = "You left your queue in " . $helpRoom->name;
+        $helpList = $dbContext->getHelpQueue($roomId);
 
-    $dbContext->addUserToQueue($date, $roomId, $user_id);
-    $message = "You joined queue in " . $helpRoom->name;
+
+    } else {
+        $date = date('Y-m-d H:i:s');
+        $dbContext->addUserToQueue($date, $roomId, $user_id);
+        $message = "You joined queue in " . $helpRoom->name;
+        $helpList = $dbContext->getHelpQueue($roomId);
+
+    }
+
 }
 ?>
 
 <p>
 <div class="row">
-    <form method="POST">
-        <input type="submit" value="Join Queue">
-    </form>
+
     <div class="col-md-12">
+        <?php
+
+        if (count($dbContext->IfUserInQueue($user_id, $roomId)) > 0) {
+            ?>
+            <form method="POST">
+                <input type="submit" value="Leave Queue">
+            </form>
+            <?php
+        } else {
+            ?>
+            <form method="POST">
+                <input type="submit" value="Join Queue">
+            </form>
+            <?php
+        }
+
+        ?>
         <div class="newsletter">
 
             <p>You are in room <strong>&nbsp;<?= $helpRoom->name ?></strong></p>
@@ -48,8 +72,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 <?php
                 foreach ($helpList as $helpPosition) {
+
                     ?>
-                    <p><?= $helpPosition->username ?></p>
+
+                    <p><?= $helpPosition->givenname ?>     <?= $helpPosition->lastname ?></p>
                     <?php
                 }
                 ?>
