@@ -64,6 +64,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         ?>
         <div class="newsletter">
 
+
+            <div>
+                <a href="inviteStudents.php?roomId=<?= $roomId ?>"> Invite students to <?= $helpRoom->name ?></a>
+            </div>
+
             <p>You are in room <strong>&nbsp;<?= $helpRoom->name ?></strong></p>
             <p><?php echo $message; ?></p>
 

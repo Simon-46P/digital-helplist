@@ -5,6 +5,6 @@
     public $name;
 
     public $creationdate;
-    public $user_id;
+    public $admin_user_id;
 
 }

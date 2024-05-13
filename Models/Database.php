@@ -3,6 +3,9 @@ require_once ('Models/Customer.php');
 require_once ('Models/UserDatabase.php');
 require_once ("Models/QueueRoom.php");
 require_once ("Models/QueuePosition.php");
+require_once ("Models/roomaccess.php");
+require_once ("Models/user.php");
+
 class DBContext
 {
 
@@ -85,6 +88,34 @@ class DBContext
         $prep->execute(["username" => $username]);
         $result = $prep->fetch(PDO::FETCH_ASSOC);
         return $result['accountrole'];
+    }
+    function getUserIdWithEmail($email)
+    {
+        $prep = $this->pdo->prepare("SELECT id FROM users where email = :email ");
+        $prep->execute(["email" => $email]);
+        $prep->setFetchMode(PDO::FETCH_CLASS, "User");
+        return $prep->fetchAll();
+    }
+
+    function getRoomAccessUserId($user_id, $roomId)
+    {
+        $prep = $this->pdo->prepare("SELECT * FROM roomaccess where user_id = :user_id and queueroom_id = :roomId");
+        $prep->setFetchMode(PDO::FETCH_CLASS, "roomaccess");
+        $prep->execute(["user_id" => $user_id, "roomId" => $roomId]);
+        return $prep->fetchAll();
+    }
+
+    function inviteUserToRoom($date, $user_id, $queueroom_id, $active = true)
+    {
+        $prep = $this->pdo->prepare("INSERT INTO roomaccess (date, active, queueroom_id, user_id)
+        VALUES (:date, :active, :queueroom_id, :user_id)");
+        $prep->execute([
+            "date" => $date,
+            "active" => $active,
+            "queueroom_id" => $queueroom_id,
+            "user_id" => $user_id
+        ]);
+        return $this->pdo->lastInsertId();
     }
 
     public function getUserData($userId)
@@ -231,6 +262,18 @@ class DBContext
 
         $this->pdo->exec($sql);
 
+        $sql = "CREATE TABLE IF NOT EXISTS `RoomAccess` (
+            `id` int NOT NULL AUTO_INCREMENT,
+            `date` datetime NOT NULL,
+            `active` boolean NOT NULL,
+            `queueroom_id` int NOT NULL,
+            `user_id` int NOT NULL,
+            PRIMARY KEY (`id`),
+            FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`),
+            FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+        ) ENGINE=MyISAM";
+
+        $this->pdo->exec($sql);
 
         $this->usersDatabase->setupUsers();
         $this->initialized = true;
