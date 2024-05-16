@@ -38,11 +38,26 @@ class DBContext
         $this->initIfNotInitialized();
 
     }
-    function getHelpRooms($roomId = null)
+    function getHelpRooms($user_id = null, $roomId = null)
     {
-        $sql = "SELECT * FROM QueueRoom";
-        $parramsArray = [];
+        $sql = "SELECT * FROM QueueRoom LEFT JOIN roomaccess ON roomaccess.queueroom_id = QueueRoom.id";
+        $paramsArray = [];
         $addedWhere = false;
+
+
+        if ($user_id !== null && strlen($user_id) > 0) {
+            if (!$addedWhere) {
+                $sql = $sql . " WHERE ";
+                $addedWhere = true;
+            } else {
+                $sql = $sql . " AND ";
+
+            }
+            $sql .= " user_id = :user_id ";
+            $sql .= " or admin_user_id = :user_id ";
+            $paramsArray["user_id"] = $user_id;
+
+        }
 
         if ($roomId !== null && strlen($roomId) > 0) {
             if (!$addedWhere) {
@@ -51,13 +66,23 @@ class DBContext
             } else {
                 $sql = $sql . " AND ";
             }
-            $sql = $sql . " ( id = :roomId )";
-            $parramsArray["roomId"] = $roomId;
+            $sql = $sql . " QueueRoom.id = :roomId ";
+            $paramsArray["roomId"] = $roomId;
         }
+
         $prep = $this->pdo->prepare($sql);
         $prep->setFetchMode(PDO::FETCH_CLASS, "QueueRoom");
-        $prep->execute($parramsArray);
+        $prep->execute($paramsArray);
         return $prep->fetchAll();
+    }
+    function roomPermissions($roomId, $helpRooms, $user_id): bool
+    {
+        foreach ($helpRooms as $helpRoom) {
+            if ($roomId === $helpRoom->id && $user_id === $helpRoom->user_id || $roomId === $helpRoom->id && $user_id === $helpRoom->admin_user_id) {
+                return false;
+            }
+        }
+        return true;
     }
 
     function createRoomQueue($roomName, $creationDate, $userId)
@@ -263,12 +288,12 @@ class DBContext
         $this->pdo->exec($sql);
 
         $sql = "CREATE TABLE IF NOT EXISTS `RoomAccess` (
-            `id` int NOT NULL AUTO_INCREMENT,
+            -- `id` int NOT NULL AUTO_INCREMENT,
             `date` datetime NOT NULL,
             `active` boolean NOT NULL,
             `queueroom_id` int NOT NULL,
             `user_id` int NOT NULL,
-            PRIMARY KEY (`id`),
+            PRIMARY KEY (`queueroom_id`, `user_id`),
             FOREIGN KEY (`queueroom_id`) REFERENCES `QueueRoom` (`id`),
             FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
         ) ENGINE=MyISAM";

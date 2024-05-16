@@ -13,15 +13,19 @@ if (!isset($TPL)) {
 
 $dbContext = new DbContext();
 $user_id = $dbContext->getUsersDatabase()->getAuth()->getUserId();
-if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()) {
+
+
+$message = "";
+$username = "";
+$roomId = intval($_GET["roomId"]);
+$helpRooms = $dbContext->getHelpRooms($user_id);
+if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn() || $dbContext->roomPermissions($roomId, $helpRooms, $user_id)) {
     header("Location: /AccountLogin.php");
     exit;
 }
 date_default_timezone_set("Europe/Stockholm");
-$message = "";
-$username = "";
-$roomId = intval($_GET["roomId"]);
-$helpRoom = $dbContext->getHelpRooms($roomId)[0];
+
+$helpRoom = $dbContext->getHelpRooms(null, $roomId)[0];
 $helpList = $dbContext->getHelpQueue($roomId);
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (count($dbContext->IfUserInQueue($user_id, $roomId)) > 0) {
@@ -70,7 +74,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             </div>
 
             <p>You are in room <strong>&nbsp;<?= $helpRoom->name ?></strong></p>
-            <p><?php echo $message; ?></p>
+            <p><?php echo $message;
+
+            echo $dbContext->roomPermissions($roomId, $helpRooms, $user_id);
+
+            ?></p>
 
             <section>
                 <h2>Help List</h2>

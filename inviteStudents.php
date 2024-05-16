@@ -20,8 +20,8 @@ $validator = new Validator($_POST);
 $roomId = intval($_GET["roomId"]);
 
 $user_id = $dbContext->getUsersDatabase()->getAuth()->getUserId();
-$helpRoom = $dbContext->getHelpRooms($roomId)[0];
-if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn() || !$user_id === $helpRoom->admin_user_id) {
+$helpRoom = $dbContext->getHelpRooms(null, $roomId)[0];
+if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn() || $user_id !== $helpRoom->admin_user_id) {
     header("Location: /AccountLogin.php");
     exit;
 }
@@ -39,14 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $date = date('Y-m-d H:i:s');
 
         $message = "Added " . $email . " to class " . $helpRoom->name;
-        !count($dbContext->getRoomAccessUserId($newMemberId, $roomId)) ? $dbContext->inviteUserToRoom($date, $newMemberId, $roomId) : $message = "Alredy added";
+        !count($dbContext->getRoomAccessUserId($newMemberId, $roomId)) ? $dbContext->inviteUserToRoom($date, $newMemberId, $roomId) : $message = "Alredy added or have not registered to the website";
     } else {
-        $message = "wrong";
+        $message = "Wrong text format";
 
     }
-} else {
-    $message = "something went wrong";
-
 }
 ?>
 

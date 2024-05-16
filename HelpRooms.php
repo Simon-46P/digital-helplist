@@ -12,6 +12,9 @@ if (!isset($TPL)) {
 }
 
 $dbContext = new DbContext();
+$user_id = $dbContext->getUsersDatabase()->getAuth()->getUserId();
+$helpRooms = $dbContext->getHelpRooms($user_id);
+
 if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()) {
     header("Location: /AccountLogin.php");
     exit;
@@ -20,7 +23,6 @@ if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn()) {
 $message = "";
 $username = "";
 
-$helpRooms = $dbContext->getHelpRooms();
 
 
 ?>
@@ -34,10 +36,16 @@ $helpRooms = $dbContext->getHelpRooms();
             <p><?php echo $message; ?></p>
             <section>
                 <?php
+                $lastId = null;
                 foreach ($helpRooms as $helpRoom) {
+                    if ($lastId === $helpRoom->id)
+                        continue;
+                    $lastId = $helpRoom->id;
+
                     ?>
                     <article>
-                        <a href="HelpRoom.php?roomId=<?= $helpRoom->id ?>"><?= $helpRoom->name ?></a>
+                        <a href="HelpRoom.php?roomId=<?= $helpRoom->id ?>"
+                            class="help__room__name <?php echo $helpRoom->admin_user_id === $user_id ? "room__admin" : "" ?>"><?= $helpRoom->name ?></a>
                     </article>
                     <?php
                 }
