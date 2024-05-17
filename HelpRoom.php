@@ -26,23 +26,33 @@ if (!$dbContext->getUsersDatabase()->getAuth()->isLoggedIn() || $dbContext->room
 date_default_timezone_set("Europe/Stockholm");
 
 $helpRoom = $dbContext->getHelpRooms(null, $roomId)[0];
-$helpList = $dbContext->getHelpQueue($roomId);
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (count($dbContext->IfUserInQueue($user_id, $roomId)) > 0) {
-        $dbContext->removeFromQueue($user_id, $roomId);
-        $message = "You left your queue in " . $helpRoom->name;
-        $helpList = $dbContext->getHelpQueue($roomId);
 
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    if ($_POST["formId"] !== "Done") {
+
+        if (count($dbContext->IfUserInQueue($user_id, $roomId)) > 0) {
+            $dbContext->removeFromQueue($user_id, $roomId);
+            $message = "You left your queue in " . $helpRoom->name;
+
+
+        } else {
+            $date = date('Y-m-d H:i:s');
+            $dbContext->addUserToQueue($date, $roomId, $user_id);
+            $message = "You joined queue in " . $helpRoom->name;
+
+        }
 
     } else {
-        $date = date('Y-m-d H:i:s');
-        $dbContext->addUserToQueue($date, $roomId, $user_id);
-        $message = "You joined queue in " . $helpRoom->name;
-        $helpList = $dbContext->getHelpQueue($roomId);
+        $queuePosId = $_POST["queuePosId"];
+        $dbContext->HelpedStudent(false, $queuePosId);
 
     }
 
+
 }
+$helpList = $dbContext->getHelpQueue($roomId);
+
 ?>
 
 <p>
@@ -55,12 +65,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             ?>
             <form method="POST">
                 <input type="submit" value="Leave Queue">
+                <input type="hidden" name="formId" value="">
+
             </form>
             <?php
         } else {
             ?>
             <form method="POST">
                 <input type="submit" value="Join Queue">
+                <input type="hidden" name="formId" value="">
+
             </form>
             <?php
         }
@@ -89,10 +103,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     ?>
 
                     <p><?= $helpPosition->givenname ?>     <?= $helpPosition->lastname ?></p>
+
+                    <?php if ($user_id === $helpRoom->admin_user_id) {
+                        ?>
+                        <form method="POST">
+
+                            <input type="submit" value="Done">
+                            <input type="hidden" name="queuePosId" value="<?= $helpPosition->id ?>">
+                            <input type="hidden" name="formId" value="Done">
+
+                        </form>
+
+                    <?php } ?>
+
+
                     <?php
                 }
                 ?>
-
 
             </section>
 

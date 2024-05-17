@@ -84,6 +84,16 @@ class DBContext
         }
         return true;
     }
+    function HelpedStudent(bool $helped, $queuePositionId)
+    {
+        $setValue = $helped ? 1 : 0;
+
+        $prep = $this->pdo->prepare("UPDATE queueposition set active = :helped where id = :queuePositionId");
+        $prep->execute([
+            "helped" => $setValue,
+            "queuePositionId" => $queuePositionId
+        ]);
+    }
 
     function createRoomQueue($roomName, $creationDate, $userId)
     {
@@ -249,7 +259,7 @@ class DBContext
         }
 
         $sql = "CREATE TABLE IF NOT EXISTS `UserDetails` (
-            `id` int NOT NULL AUTO_INCREMENT,
+            -- `id` int NOTs NULL AUTO_INCREMENT,
             `givenname` varchar(50) NOT NULL,
             `lastname` varchar(50) NOT NULL,
             `street` varchar(50) NOT NULL,
@@ -257,7 +267,7 @@ class DBContext
             `zip` varchar(10) NOT NULL,
             `accountrole` varchar(10) NOT NULL,
             `user_id` int(10) unsigned NOT NULL,
-            PRIMARY KEY (`id`),
+            PRIMARY KEY (`user_id`),
             FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
             ) ENGINE=MyISAM";
 
